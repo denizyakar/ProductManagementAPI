@@ -12,3 +12,5 @@
         public int Stock { get; set; }
     }
 }
+
+
