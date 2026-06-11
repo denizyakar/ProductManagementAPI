@@ -15,6 +15,8 @@ namespace ProductManagementAPI.Repositories
 
         public List<Product> GetAll()
         {
+            //database oncesi kodlar
+
             //return ProductData.Products;
 
             return _context.Products.ToList();
@@ -22,6 +24,8 @@ namespace ProductManagementAPI.Repositories
 
         public Product? GetById(int id)
         {
+            // database oncesi kodlar
+
             //foreach(var product in ProductData.Products)
             //{
             //    if (product.Id == id) { return product; } 
@@ -33,6 +37,8 @@ namespace ProductManagementAPI.Repositories
         }
         public Product Add(Product product)
         {
+            //database oncesi kodlar
+
             //product.Id = ProductData.NextId; // 1 ile baslatilan id'yi ilk eklenen product'a ver
             //ProductData.NextId++; // sonraki eklenecek product icin arttir
             //ProductData.Products.Add(product);
@@ -47,6 +53,8 @@ namespace ProductManagementAPI.Repositories
 
         public Product? Update(int id, Product product)
         {
+            //database oncesi kodlar
+
             //foreach(var i in ProductData.Products)
             //{
             //    if (i.Id == id)
@@ -78,6 +86,8 @@ namespace ProductManagementAPI.Repositories
 
         public bool Delete(int id)
         {
+            //database oncesi kodlar
+
             //foreach (var product in ProductData.Products)
             //{
             //    if (product.Id == id) { ProductData.Products.Remove(product); return true; }

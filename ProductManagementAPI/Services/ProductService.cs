@@ -27,11 +27,13 @@ namespace ProductManagementAPI.Services
         //add
         public Product? Add(Product product)
         {
-            if (string.IsNullOrWhiteSpace(product.Name)) { return null; }
+            //validator oncesi kontroller
 
-            if (product.Price < 0) { return null; }
+            //if (string.IsNullOrWhiteSpace(product.Name)) { return null; }
 
-            if (product.Stock < 0) { return null; }
+            //if (product.Price < 0) { return null; }
+
+            //if (product.Stock < 0) { return null; }
 
             return _productRepository.Add(product); 
         }
@@ -39,11 +41,13 @@ namespace ProductManagementAPI.Services
         //update
         public Product? Update(int id, Product product)
         {
-            if (string.IsNullOrWhiteSpace(product.Name)) { return null; }
+            //validator oncesi kontroller
 
-            if (product.Price < 0) { return null; }
+            //if (string.IsNullOrWhiteSpace(product.Name)) { return null; }
 
-            if (product.Stock < 0) { return null; }
+            //if (product.Price < 0) { return null; }
+
+            //if (product.Stock < 0) { return null; }
 
             return _productRepository.Update(id, product);
         }
