@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using ProductManagementAPI.Services;
 using ProductManagementAPI.Models;
+using ProductManagementAPI.Validators;
+using FluentValidation;
 
 namespace ProductManagementAPI.Controllers
 {
@@ -10,15 +12,18 @@ namespace ProductManagementAPI.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;
+        private readonly IValidator<Product> _productValidator;
 
-        public ProductsController(IProductService productService)
+        public ProductsController(IProductService productService, IValidator<Product> productValidator)
         {
-            _productService = productService;
+            _productService = productService; // DI
+            _productValidator = productValidator;
         }
 
         [HttpGet]
         public IActionResult GetAll()
         {
+            //throw new Exception("Test exception, is it working?");
             var products = _productService.GetAll();
 
             return Ok(products);
@@ -39,12 +44,20 @@ namespace ProductManagementAPI.Controllers
         [HttpPost]
         public IActionResult Add([FromBody] Product product)
         {
+            //validation
+            var validationResult = _productValidator.Validate(product);
+
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.Errors); //bad request dondur
+            }
+
             var createdProduct = _productService.Add(product);
 
-            if (createdProduct == null)
-            {
-                return BadRequest();
-            }
+            //if (createdProduct == null)
+            //{
+            //    return BadRequest();
+            //}
 
             return Created("api/products/" + createdProduct.Id, createdProduct);
 
@@ -53,6 +66,14 @@ namespace ProductManagementAPI.Controllers
         [HttpPut("{id}")]
         public IActionResult Update([FromRoute] int id, [FromBody] Product product)
         {
+            //validation
+            var validationResult = _productValidator.Validate(product);
+
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.Errors);
+            }
+
             var updatedProduct = _productService.Update(id, product);
 
             if (updatedProduct == null)
